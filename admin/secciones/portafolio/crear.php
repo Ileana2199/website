@@ -36,7 +36,7 @@ $sentencia->bindParam(":url",$url);
 
 $sentencia->execute();
 
-$mensaje="Registro modificado con éxito";
+$mensaje="Registro agregado con éxito";
 
 header("Location:index.php?mensaje=".$mensaje);
 

@@ -45,7 +45,7 @@ if(!isset($_SESSION['usuario'])){ //si no existe!
 <body>
   <header>
     <!-- place navbar here -->
-    <nav class="navbar navbar-expand navbar-light bg-light">
+    <nav class="navbar navbar-expand navbar-dark bg-dark" > 
         <div class="nav navbar-nav">
             <a class="nav-item nav-link active" href="#" aria-current="page">Administrador<span class="visually-hidden">(current)</span></a>
             <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/servicios/">Servicios</a>

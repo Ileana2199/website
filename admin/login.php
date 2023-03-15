@@ -99,7 +99,7 @@ header("Location:index.php");
 
             </div>
             
-                <div class="card-footer text-muted">
+                <div class="card-footer text-muted" >
                 </div>
 
             </div>
