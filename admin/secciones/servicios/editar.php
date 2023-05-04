@@ -6,7 +6,7 @@ if(isset($_GET['txtID'])){
     //RECUPERAR LOS DATOS DEL ID (SELECCIONADO)CORRESPONDIENTE
     $txtID=(isset($_GET['txtID']))?$_GET['txtID']:"";
 
-    $sentencia=$conexion->prepare("SELECT * FROM tbl_servicios WHERE id=:id ");
+    $sentencia=$conexion->prepare("SELECT * FROM tbl_servicios WHERE id=:ids ");
     $sentencia->bindParam(":id",$txtID);
     $sentencia->execute();
     $registro=$sentencia->fetch(PDO::FETCH_LAZY);

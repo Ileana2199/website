@@ -6,16 +6,28 @@ include("../../bd.php");
 if(isset($_GET['txtID'])){
 //BORRAR REGIRSTRO CON EL ID CORRESPONDIENTE
 $txtID=(isset($_GET['txtID']))?$_GET['txtID']:"";
-$sentencia=$conexion->prepare("DELETE FROM tbl_servicios WHERE id=:id ");
+// $sentencia=$conexion->prepare("DELETE FROM tbl_servicios WHERE id=:id ");
+// $sentencia->bindParam(":id",$txtID);
+
+// $sentencia->execute();
+
+$sentencia=$conexion->prepare("UPDATE tbl_servicios
+SET deleted_at = 1 WHERE id=:id");
 $sentencia->bindParam(":id",$txtID);
 $sentencia->execute();
+
 
 }
 
 
-$sentencia=$conexion->prepare("SELECT * FROM `tbl_servicios`");
+$sentencia=$conexion->prepare("SELECT * FROM `tbl_servicios` WHERE deleted_at = 0");
 $sentencia->execute();
 $lista_servicios=$sentencia->fetchAll(PDO::FETCH_ASSOC); //Obtener todos los registros de la tabla servicios
+
+
+
+
+
 
 
 include("../../templates/header.php"); ?>
@@ -53,7 +65,7 @@ include("../../templates/header.php"); ?>
 
                         <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registros['ID'];?>" role="button">Editar</a>
                         |
-                        <a name="" id="" class="btn btn-danger" onclick="return confirmDelete();" href="index.php?txtID=<?php echo $registros['ID'];?>"  role="button">Eliminar</a>
+                        <a name="" id="" class="btn btn-danger" onclick="confirmDelete(event);" href="index.php?txtID=<?php echo $registros['ID'];?>"  role="button">Eliminar</a>
                         </td>
                     </tr>
                     <?php  } ?>

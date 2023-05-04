@@ -14,19 +14,22 @@ if(isset($_GET['txtID'])){
 
         if(file_exists("../../../assets/img/portfolio/".$registro_imagen['imagen'])){
             unlink("../../../assets/img/portfolio/".$registro_imagen['imagen']);
-
     }
-
 }
 
-$sentencia=$conexion->prepare("DELETE FROM tbl_portafolio WHERE id=:id ");
+$sentencia=$conexion->prepare("UPDATE tbl_portafolio
+SET deleted_at = 1 WHERE id=:id");
 $sentencia->bindParam(":id",$txtID);
 $sentencia->execute();
 
-}
+// $sentencia=$conexion->prepare("DELETE FROM tbl_portafolio WHERE id=:id ");
+// $sentencia->bindParam(":id",$txtID);
+// $sentencia->execute();
+header("Location: index.php");
 
+}
 //seleccionar registros
-$sentencia=$conexion->prepare("SELECT * FROM `tbl_portafolio`");
+$sentencia=$conexion->prepare("SELECT * FROM `tbl_portafolio` WHERE deleted_at = 0");
 $sentencia->execute();
 $lista_portafolio=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
@@ -79,14 +82,28 @@ include("../../templates/header.php"); ?>
                 
                     <td scope="col"> <a name="" id="" class="btn btn-primary" href="editar.php?txtID=<?php echo $registros['ID'];?>" role="button">Editar</a>
                     |
-                    <a name="" id="" class="btn btn-danger" onclick="return confirmDelete();" href="index.php?txtID=<?php echo $registros['ID'];?>" role="button" onclick="AlertarEliminacion()">Eliminar</a>
+                    <a name="" id="" class="btn btn-danger" onclick="confirmDelete(event);" href="index.php?txtID=<?php echo $registros['ID'];?>" role="button">Eliminar</a>
                     </td>
                 </tr>
                <?php }?>
             </tbody>
         </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
     </div>
 </div>
+
 
 <?php include("../../templates/footer.php");?>

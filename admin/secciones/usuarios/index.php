@@ -5,15 +5,22 @@ include("../../bd.php");
 if(isset($_GET['txtID'])){
     //3)BORRAR REGIRSTRO CON EL ID CORRESPONDIENTE EN LA LISTA DE REGISTROS
     $txtID=(isset($_GET['txtID']))?$_GET['txtID']:"";
-    $sentencia=$conexion->prepare("DELETE FROM tbl_usuarios WHERE id=:id ");
+    // $sentencia=$conexion->prepare("DELETE FROM tbl_usuarios WHERE id=:id ");
+    // $sentencia->bindParam(":id",$txtID);
+    // $sentencia->execute();
+    
+
+    $sentencia=$conexion->prepare("UPDATE tbl_usuarios
+    SET deleted_at = 1 WHERE id=:id");
     $sentencia->bindParam(":id",$txtID);
     $sentencia->execute();
     
+
     }
 
 //recuperar los datos para mostar en la interfaz de la lista de usuarios.
 //1) seleccionar registros 2)foreach
-$sentencia=$conexion->prepare("SELECT * FROM `tbl_usuarios`");
+$sentencia=$conexion->prepare("SELECT * FROM `tbl_usuarios` WHERE deleted_at = 0");
 $sentencia->execute();
 $lista_usuarios=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
@@ -48,7 +55,7 @@ include("../../templates/header.php");
                 <td>
                 <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registros['ID'];?>" role="button">Editar</a>
                 |
-                <a name="" id="" class="btn btn-danger" onclick="return confirmDelete();" href="index.php?txtID=<?php echo $registros['ID'];?>" role="button" onclick="AlertarEliminacion()" >Eliminar</a>
+                <a name="" id=""  class="btn btn-danger"  href="index.php?txtID=<?php echo $registros['ID'];?>"  onclick="confirmDelete(event);" role="button">Eliminar</a>
 
             </td>
             </tr>
@@ -60,4 +67,6 @@ include("../../templates/header.php");
     <div class="card-footer text-muted">
     </div>
 </div>
+
+
 <?php include("../../templates/footer.php");?>

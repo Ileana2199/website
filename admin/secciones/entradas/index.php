@@ -20,13 +20,19 @@ if(isset($_GET['txtID'])){
 
 }
 
-$sentencia=$conexion->prepare("DELETE FROM tbl_entradas WHERE id=:id ");
+
+$sentencia=$conexion->prepare("UPDATE tbl_entradas
+SET deleted_at = 1 WHERE id=:id");
 $sentencia->bindParam(":id",$txtID);
 $sentencia->execute();
 
+// $sentencia=$conexion->prepare("DELETE FROM tbl_entradas WHERE id=:id ");
+// $sentencia->bindParam(":id",$txtID);
+// $sentencia->execute();
+
 }
 //seleccionar registros
-$sentencia=$conexion->prepare("SELECT * FROM `tbl_entradas`");
+$sentencia=$conexion->prepare("SELECT * FROM `tbl_entradas` WHERE deleted_at = 0");
 $sentencia->execute();
 $lista_entradas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
@@ -65,7 +71,7 @@ include("../../templates/header.php");
             <td>
     <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registros['ID'];?>" role="button">Editar</a>
     |
-    <a name="" id="" class="btn btn-danger" onclick="return confirmDelete();" href="index.php?txtID=<?php echo $registros['ID'];?>" role="button" onclick="AlertarEliminacion()" >Eliminar</a>
+    <a name="" id="" class="btn btn-danger" onclick="confirmDelete(event);" href="index.php?txtID=<?php echo $registros['ID'];?>" role="button" onclick="AlertarEliminacion()" >Eliminar</a>
 
         </td>
         </tr>

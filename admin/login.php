@@ -16,7 +16,9 @@ AND password=:password
 
 //remplazo de los valores
 $sentencia->bindParam(":usuario",$usuario);
-$sentencia->bindParam(":password",md5($password));
+$sentencia->bindParam(":password",$password);
+$password=md5($password);
+
 $sentencia->execute();
 
 $lista_usuarios=$sentencia->fetch(PDO::FETCH_LAZY); //consulta todos los datos que tenemos
@@ -87,12 +89,16 @@ header("Location:index.php");
               <label for="usuario" class="form-label">Usuario</label>
               <input type="text"
                 class="form-control" name="usuario" id="usuario" aria-describedby="helpId" placeholder="usuario"> 
+                <small class="form-text text-muted">Escriba su usuario</small>
+
+
             </div>
 
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
               <input type="password"
                 class="form-control" name="password" id="password" aria-describedby="helpId" placeholder="Password">
+                <small class="form-text text-muted">Escriba su password</small>
             </div>
             <input name="" id="" class="btn btn-primary" type="submit" value="Ingresar">
             </form>

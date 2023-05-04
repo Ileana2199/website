@@ -1,36 +1,27 @@
 <?php include("admin/bd.php");
 
 //primero paso-hacer consulta - seleccionar registos de servicios segundo paso hacer los foreach 
-$sentencia=$conexion->prepare("SELECT * FROM `tbl_servicios`");
+$sentencia=$conexion->prepare("SELECT * FROM `tbl_servicios` WHERE deleted_at=0");
 $sentencia->execute();
 $lista_servicios=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-
-//seleccionar registos de portafolio 
-$sentencia=$conexion->prepare("SELECT * FROM `tbl_portafolio`");
+//seleccionar registos  
+$sentencia=$conexion->prepare("SELECT * FROM `tbl_portafolio` WHERE deleted_at=0 ");
 $sentencia->execute();
 $lista_portafolio=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
-$sentencia=$conexion->prepare("SELECT * FROM `tbl_portafolio`");
-$sentencia->execute();
-$lista_portafolio=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-
-//seleccionar registros
-$sentencia=$conexion->prepare("SELECT * FROM `tbl_entradas`");
+$sentencia=$conexion->prepare("SELECT * FROM `tbl_entradas` WHERE deleted_at=0");
 $sentencia->execute();
 $lista_entradas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
-//seleccionar registros
+$sentencia=$conexion->prepare("SELECT * FROM `tbl_equipo` WHERE deleted_at=0");
+$sentencia->execute();
+$lista_equipo=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
 $sentencia=$conexion->prepare("SELECT * FROM `tbl_configuraciones`");
 $sentencia->execute();
 $lista_configuraciones=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
-//seleccionar registros
-$sentencia=$conexion->prepare("SELECT * FROM `tbl_equipo`");
-$sentencia->execute();
-$lista_equipo=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -172,6 +163,7 @@ $lista_equipo=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </section>
         <!-- About-->
+      
         <section class="page-section" id="about">
             <div class="container">
                 <div class="text-center">
@@ -211,6 +203,7 @@ $lista_equipo=$sentencia->fetchAll(PDO::FETCH_ASSOC);
                 </ul>
             </div>
         </section>
+        </head>
         <!-- Team-->
         <section class="page-section bg-light" id="team">
             <div class="container">

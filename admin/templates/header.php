@@ -38,14 +38,14 @@ if(!isset($_SESSION['usuario'])){ //si no existe!
  
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
+  <link rel="stylesheet" href="./libs/css/bootstrap.min.css"/>
 
 </head>
 
 <body>
   <header>
     <!-- place navbar here -->
-    <nav class="navbar navbar-expand navbar-dark bg-dark" > 
+    <nav class="navbar navbar-expand navbar-dark bg-primary" > 
         <div class="nav navbar-nav">
             <a class="nav-item nav-link active" href="#" aria-current="page">Administrador<span class="visually-hidden">(current)</span></a>
             <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/servicios/">Servicios</a>
@@ -70,16 +70,35 @@ Swal.fire({icon:"success", title:"<?php echo $_GET['mensaje'];?>"});
 <?php } ?>
 </script>
 
-<script>
 
-function confirmDelete() {
-  
-  var confirmar = confirm("¿Realmente desea eliminarlo? ");
-            if (confirmar) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+<script>
+function confirmDelete(e) {
+e.preventDefault();
+var url=e.currentTarget.getAttribute('href')
+
+
+Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location.href =url;
+    
+  }
+})
+
+}
 
 </script>
+
+
+
+
+
+
+
