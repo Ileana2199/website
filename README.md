@@ -1,1 +1,7 @@
 ![image](https://github.com/Ileana2199/website/assets/124406774/3a6ba5f0-8242-443e-9594-81a953e8cd7c)
+![image](https://github.com/Ileana2199/website/assets/124406774/bfc976f3-7a72-40e7-97eb-af78697d2144)
+![image](https://github.com/Ileana2199/website/assets/124406774/a51bfdec-debe-4747-a6c7-93574aefed07)
+![image](https://github.com/Ileana2199/website/assets/124406774/b64187a2-8d38-4976-84c7-ab1605ddc2e7)
+![image](https://github.com/Ileana2199/website/assets/124406774/2ade0569-830c-4002-8d43-010de74497af)
+![image](https://github.com/Ileana2199/website/assets/124406774/ffa68a0b-86b1-4371-b7c5-522de98857f2)
+![image](https://github.com/Ileana2199/website/assets/124406774/29651be9-7dea-47e0-b1c3-9186d7acadc3)
